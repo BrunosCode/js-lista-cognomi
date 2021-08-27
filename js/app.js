@@ -3,31 +3,32 @@
 // 1. Create surname array
 let surnames = ["Bianchi", "Neri", "Rossi", "Verdi", "Gialli"];
 // 1.1 Inject list elements as li
-const printList = () => {
+const printList = (newMember) => {
     document.getElementById("surname-list").innerHTML = "";
     for (let i = 0; i < surnames.length; i++) {
-        document.getElementById("surname-list").innerHTML += `<li>${surnames[i]}</li>`;
+        if (surnames[i] === newMember) {
+            document.getElementById("surname-list").innerHTML += `<li><strong>${surnames[i]}</strong></li>`;
+        } else {
+            document.getElementById("surname-list").innerHTML += `<li>${surnames[i]}</li>`;
+        }
     }
 }
 printList();
 
 const joinTeam = () => {
     // 2. Ask user surname (capitalize) and push in the array
-    console.log("partito joinTeam")
-    var userSurname = document.getElementById("user-surname").value;
+    let userSurname = document.getElementById("user-surname").value;
     // 2.1 Capitalize the surname
     userSurname = userSurname[0].toUpperCase() + userSurname.slice(1).toLowerCase();
     surnames.push(userSurname);
-    // 3. Sort and print array
+    // 3. Sort array
     surnames.sort();
-    console.log(surnames);
-    printList();
     // 5. Search and store user position(+1) in the array
     // let userIndex = surnames.indexOf(userSurname) + 1;
     let userIndex = binarySearch(surnames, userSurname) + 1;
-    // 6. Print user position
+    // 6. Print list and user position
+    printList(userSurname);
     document.getElementById("user-position").innerText = "You are in position: " + userIndex;
-    console.log("You are in position: " + userIndex);
 }
 
 
